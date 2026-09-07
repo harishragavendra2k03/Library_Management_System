@@ -1,0 +1,119 @@
+package main;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Scanner scanner = new Scanner(System.in);
+		Library library = new Library();
+		int choice;
+
+		do {
+
+			System.out.println("\n=================================");
+			System.out.println("       LIBRARY MANAGEMENT SYSTEM");
+			System.out.println("=================================");
+
+			System.out.println("1. Add Book");
+			System.out.println("2. Display All Books");
+			System.out.println("3. Search Book by ID");
+			System.out.println("4. Search Book by Title");
+			System.out.println("5. Delete Book");
+			System.out.println("6. Issue Book");
+			System.out.println("7. Return Book");
+			System.out.println("8. Exit");
+
+			System.out.print("Enter your choice: ");
+
+			choice = scanner.nextInt();
+
+			switch (choice) {
+			
+			// ADD BOOK
+			case 1:
+
+				System.out.print("Enter Book ID: ");
+				int id = scanner.nextInt();
+
+				scanner.nextLine();
+
+				System.out.print("Enter Book Title: ");
+				String title = scanner.nextLine();
+
+				System.out.print("Enter Author Name: ");
+				String author = scanner.nextLine();
+
+				Book book = new Book(id, title, author);
+				library.addBook(book);
+				break;
+
+			// DISPLAY BOOKS
+			case 2:
+
+				library.displayAllBooks();
+				break;
+
+			
+			// SEARCH BY ID
+			case 3:
+
+				System.out.print("Enter Book ID: ");
+				int searchId = scanner.nextInt();
+				library.searchBookById(searchId);
+				break;
+
+			
+			// SEARCH BY TITLE
+			case 4:
+
+				scanner.nextLine();
+				System.out.print("Enter Book Title: ");
+				String searchTitle = scanner.nextLine();
+				library.searchBookByTitle(searchTitle);
+				break;
+
+			
+			// DELETE BOOK
+			case 5:
+
+				System.out.print("Enter Book ID to delete: ");
+				int deleteId = scanner.nextInt();
+				library.deleteBook(deleteId);
+				break;
+
+			// ISSUE BOOK
+			case 6:
+
+				System.out.print("Enter Book ID to issue: ");
+				int issueId = scanner.nextInt();
+				library.issueBook(issueId);
+				break;
+
+			
+			// RETURN BOOK
+			case 7:
+
+				System.out.print("Enter Book ID to return: ");
+				int returnId = scanner.nextInt();
+				library.returnBook(returnId);
+				break;
+
+			// EXIT
+			case 8:
+
+				System.out.println("Thank you for using Library Management System.");
+				break;
+
+			
+			// INVALID CHOICE
+			default:
+				System.out.println("Invalid choice. Please enter valid number.");
+			}
+
+		} while (choice != 8);
+		
+		scanner.close();
+	}
+}
