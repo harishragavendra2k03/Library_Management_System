@@ -1,0 +1,139 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Library {
+
+
+	private List<Book> books = new ArrayList<>();
+
+
+	// ADD BOOK
+	public void addBook(Book book) {
+
+		// Check whether book ID already exists
+		for (Book b : books) {
+
+			if (b.getId() == book.getId()) {
+				System.out.println("Book ID already exists.");
+				return;
+			}
+		}
+
+		books.add(book);
+
+		System.out.println("Book added successfully.");
+	}
+
+
+	// DISPLAY ALL BOOKS
+	public void displayAllBooks() {
+
+		if (books.isEmpty()) {
+
+			System.out.println("No books available in the library.");
+			return;
+		}
+
+		System.out.println("\n========== ALL BOOKS ==========");
+		for (Book book : books) {
+			book.displayBook();
+		}
+	}
+
+
+	// SEARCH BOOK BY ID
+	public void searchBookById(int id) {
+
+		boolean found = false;
+
+		for (Book book : books) {
+
+			if (book.getId() == id) {
+
+				System.out.println("\nBook Found:");
+				book.displayBook();
+
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			System.out.println("Book not found.");
+		}
+	}
+
+	// SEARCH BOOK BY TITLE
+	public void searchBookByTitle(String title) {
+
+		boolean found = false;
+		for (Book book : books) {
+			if (book.getTitle().equalsIgnoreCase(title)) {
+				System.out.println("\nBook Found:");
+				book.displayBook();
+				found = true;
+			}
+		}
+
+		if (!found) {
+			System.out.println("Book not found.");
+		}
+	}
+
+	
+	// DELETE BOOK
+	public void deleteBook(int id) {
+
+		for (Book book : books) {
+
+			if (book.getId() == id) {
+				books.remove(book);
+				System.out.println("Book deleted successfully.");
+				return;
+			}
+		}
+
+		System.out.println("Book not found.");
+	}
+
+
+	// ISSUE BOOK
+	public void issueBook(int id) {
+
+		for (Book book : books) {
+
+			if (book.getId() == id) {
+				if (book.isAvailable()) {
+					book.setAvailable(false);
+					System.out.println("Book issued successfully.");
+				} else {
+					System.out.println("Book is already issued.");
+				}
+				return;
+			}
+		}
+
+		System.out.println("Book not found.");
+	}
+
+	// RETURN BOOK
+	public void returnBook(int id) {
+
+		for (Book book : books) {
+
+			if (book.getId() == id) {
+				if (!book.isAvailable()) {
+					book.setAvailable(true);
+					System.out.println("Book returned successfully.");
+				} else {
+					System.out.println("Book is already available.");
+				}
+				return;
+			}
+		}
+
+		System.out.println("Book not found.");
+	}
+}
